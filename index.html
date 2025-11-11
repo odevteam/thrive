@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Apollo — Join the Waitlist</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.png" />
+
   <style>
     body {
       font-family: Inter, system-ui, sans-serif;
@@ -85,56 +87,3 @@
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="text">
-      <img src="images/logo.png" alt="Apollo logo" style="width:50px;height:50px;border-radius:8px;margin-bottom:16px;">
-      <h1>Live Allergy-Free, Eat Fearlessly.</h1>
-      <p>Discover restaurants, recipes, and products tailored to your dietary needs. Your allergies shouldn’t limit your life—let us guide the way.</p>
-
-      <form id="waitlist-form">
-        <input type="email" id="email" placeholder="Enter your email" required />
-        <button type="submit">Join Waitlist</button>
-      </form>
-
-      <div id="success" class="success">🎉 Successfully signed up!</div>
-    </div>
-
-    <img src="images/app-screen.png" alt="Apollo app screenshot" class="screenshot" />
-  </div>
-
-  <script>
-    const WAITLIST_ID = "cmhuuejr2000do501ndxq0lre"; // <-- Replace with your real waitlist ID
-    const API_URL = `https://api.freewaitlists.com/waitlists/${WAITLIST_ID}`;
-    const form = document.getElementById("waitlist-form");
-    const emailInput = document.getElementById("email");
-    const successBox = document.getElementById("success");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = emailInput.value.trim();
-      if (!email) return;
-
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            meta: { source: "Apollo landing page" }
-          }),
-        });
-
-        if (!res.ok) throw new Error("Request failed");
-
-        form.reset();
-        successBox.style.display = "block";
-        setTimeout(() => successBox.style.display = "none", 5000);
-      } catch (err) {
-        alert("There was a problem joining the waitlist. Please try again later.");
-        console.error(err);
-      }
-    });
-  </script>
-</body>
-</html>
